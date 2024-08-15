@@ -5,16 +5,16 @@ SHELL_FOLDER=$(dirname $(readlink -f "$0"))
 
 bash $SHELL_FOLDER/../common/kernel_6.1.sh
 
-rm -rf package/boot
+rm -rf package/boot package/feeds/kiddin9/accel-ppp
 
-rm -rf target/linux/generic/!(*-5.15) target/linux/rockchip
+rm -rf target/linux/rockchip
 
 git_clone_path master https://github.com/coolsnowwolf/lede package/boot target/linux/rockchip
-git_clone_path master https://github.com/coolsnowwolf/lede mv target/linux/generic
+#git_clone_path master https://github.com/coolsnowwolf/lede mv target/linux/generic
 
 wget -N https://github.com/istoreos/istoreos/raw/istoreos-22.03/target/linux/rockchip/patches-5.10/304-r2s-pwm-fan.patch -P target/linux/rockchip/patches-6.1/
 
-wget -N https://github.com/coolsnowwolf/lede/raw/master/include/kernel-6.1 -P include/
+#wget -N https://github.com/coolsnowwolf/lede/raw/master/include/kernel-6.1 -P include/
 
 sed -i "/KernelPackage,ptp/d" package/kernel/linux/modules/other.mk
 
